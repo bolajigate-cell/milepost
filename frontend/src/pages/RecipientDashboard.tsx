@@ -12,8 +12,9 @@ import './RecipientDashboard.css';
 const DEMO_RECIPIENT = 'GAH3D4RM45ETE4W7VDRCWZBPRPT63CJXAGXFYVBC2FGANBZTS4OTKXCA';
 
 /**
- * There is no contract call that lists a programme's verified payees — see
- * docs/frontend-integration.md. The seeded school is known ahead of time, so
+ * There is no contract call that lists a programme's verified payees: the
+ * registry stores them per address, so membership can be checked but not
+ * enumerated. The seeded school is known ahead of time, so
  * it seeds the picker; anyone can add another candidate address to check.
  */
 const SEEDED_PAYEES: Record<string, string[]> = {
