@@ -653,6 +653,14 @@
                           },
                           {
                             "key": {
+                              "symbol": "minimum_award"
+                            },
+                            "val": {
+                              "i128": "0"
+                            }
+                          },
+                          {
+                            "key": {
                               "symbol": "policy"
                             },
                             "val": {
