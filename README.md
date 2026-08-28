@@ -237,7 +237,11 @@ For a full list of error codes, causes, and recommended actions across all five 
 - [Programme Metadata](docs/programme-metadata.md)
 - [Error Codes](docs/error-code-reference.md)
 - [Security Model and Trust Assumptions](docs/security-model.md)
-
+- [Integrator FAQ](docs/integrator-faq.md) — recurring questions, answered with
+  the reasoning behind the design rather than only the behaviour
+- [Upgrade and Compatibility](docs/upgrade-and-compatibility.md) — what stays
+  stable across releases, how a breaking change is signalled, and what to do
+  when one lands
 ## TypeScript bindings
 
 `packages/` holds generated clients, checked in so a frontend can build without

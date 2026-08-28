@@ -9,6 +9,7 @@ import {
   UsersRound,
 } from "lucide-react";
 import { AsyncView } from "../components/state/AsyncStates";
+import { PausedBanner } from "../components/programme/PausedBanner";
 import { Badge, Card, PhaseBadge, Stat, Table } from "../components/ui";
 import { useSoroban } from "../context/useSoroban";
 import { useContractRead, useContractResult, useProgramme } from "../hooks";
@@ -226,6 +227,8 @@ export const ProgrammeDetail = () => {
 
   return (
     <div className="programme-detail">
+      <PausedBanner client={programme} />
+
       <header className="programme-hero glass-panel animate-fade-up">
         <div className="programme-hero__copy">
           <Badge tone="accent">Live testnet programme</Badge>
