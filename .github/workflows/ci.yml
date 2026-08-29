@@ -23,6 +23,13 @@ jobs:
       - name: Format
         run: cargo fmt --all --check
 
+      # A prebuilt binary rather than `cargo install cargo-audit`, which
+      # compiles from source on every run and adds minutes to every push.
+      - name: Check dependencies for known vulnerabilities
+        uses: rustsec/audit-check@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       # Must precede both Clippy and Test. The registry's tests instantiate the
       # programme from its built wasm, the same way the registry does on-chain,
       # so the artifact has to exist before anything compiles a test target —
@@ -31,6 +38,9 @@ jobs:
       # time.
       - name: Build wasm
         run: cargo build --target wasm32v1-none --release
+
+      - name: Validate contract documentation
+        run: ./scripts/check-docs.sh
 
       # Bindings in packages/ are generated from this wasm and checked in. If a
       # contract interface changes and nobody regenerates them, the frontend
@@ -108,6 +118,11 @@ jobs:
 
   frontend:
     runs-on: ubuntu-latest
+    # Deliberately not `needs: check`. This job builds the binding packages
+    # from checked-in TypeScript and never touches the wasm, so serialising it
+    # behind the contract job only makes the pipeline longer — and skips
+    # frontend entirely whenever the contract job is red, which is exactly when
+    # you still want to know.
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
