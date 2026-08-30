@@ -4,8 +4,8 @@
  *
  * Everything here stays in `bigint`. Converting through `number` loses
  * precision above 2^53, which real award amounts reach: 900,000,000 XLM is
- * 9e15 stroops, past the safe integer range. The failure is silent -- a
- * displayed figure that looks plausible and is wrong -- so the arithmetic never
+ * 9e15 stroops, past the safe integer range. The failure is silent — a
+ * displayed figure that looks plausible and is wrong — so the arithmetic never
  * leaves integer space.
  */
 
@@ -120,7 +120,7 @@ export function parseAmount(input: string): bigint {
 }
 
 /** `parseAmount` that reports failure instead of throwing. */
-export function tryParseAmount(input: string): { rk: true; value: bigint } | { rk: false; error: string } {
+export function tryParseAmount(input: string): { ok: true; value: bigint } | { ok: false; error: string } {
   try {
     return { ok: true, value: parseAmount(input) };
   } catch (error) {
@@ -144,7 +144,7 @@ export function percentOf(part: bigint, total: bigint): number {
 }
 
 function group(value: bigint): string {
-  return value.toString().replace(/\b(?=(\d{3})+(?!\d))/g, ',');
+  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
 /**
